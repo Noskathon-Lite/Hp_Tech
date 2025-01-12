@@ -3,6 +3,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen from '../Components/LoginScreen';
 import RegisterScreen from '../Components/RegisterScreen';
+import  ProductForm from '../Components/ProductForm';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -18,6 +20,11 @@ const App = () => {
         <Stack.Screen 
           name="Register" 
           component={RegisterScreen} 
+          options={{ headerShown: false }} 
+        />
+        <Stack.Screen 
+          name="ProductForm" 
+          component={ProductForm} 
           options={{ headerShown: false }} 
         />
       </Stack.Navigator>
