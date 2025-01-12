@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet } from 'react-native';
+import { db } from '../firebase'; // Adjust the path to your firebase.js
+import { collection, addDoc } from 'firebase/firestore';
 
 const RegisterScreen = ({ navigation }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const validateAndRegister = () => {
+  const validateAndRegister = async () => {
     if (!name) {
       Alert.alert('Error', 'Name is required.');
       return;
@@ -44,7 +46,18 @@ const RegisterScreen = ({ navigation }) => {
       return;
     }
 
-    Alert.alert('Success', 'Registered successfully!');
+    try {
+      // Save user data to Firestore
+      const docRef = await addDoc(collection(db, 'users'), {
+        name, 
+        email,
+        password, // Avoid storing plaintext passwords in production! Use a hashing mechanism instead.
+      });
+      Alert.alert('Success', `Registered successfully! User ID: ${docRef.id}`);
+      navigation.navigate('Login'); // Navigate to Login screen
+    } catch (error) {
+      Alert.alert('Error', `Failed to register: ${error.message}`);
+    }
   };
 
   return (
