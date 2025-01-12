@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet } from 'react-native';
 
-const LoginScreen = ({ navigation }) => {
+const RegisterScreen = ({ navigation }) => {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const validateAndLogin = () => {
+  const validateAndRegister = () => {
+    if (!name) {
+      Alert.alert('Error', 'Name is required.');
+      return;
+    }
     if (!email) {
       Alert.alert('Error', 'Email is required.');
       return;
@@ -18,12 +23,39 @@ const LoginScreen = ({ navigation }) => {
       Alert.alert('Error', 'Password is required.');
       return;
     }
-    Alert.alert('Success', 'Logged in successfully!');
+    if (password.length < 8) {
+      Alert.alert('Error', 'Password must be at least 8 characters long.');
+      return;
+    }
+    if (!/[A-Z]/.test(password)) {
+      Alert.alert('Error', 'Password must contain at least one uppercase letter.');
+      return;
+    }
+    if (!/[a-z]/.test(password)) {
+      Alert.alert('Error', 'Password must contain at least one lowercase letter.');
+      return;
+    }
+    if (!/\d/.test(password)) {
+      Alert.alert('Error', 'Password must contain at least one number.');
+      return;
+    }
+    if (!/[!@#$%^&*]/.test(password)) {
+      Alert.alert('Error', 'Password must contain at least one special character (!@#$%^&*).');
+      return;
+    }
+
+    Alert.alert('Success', 'Registered successfully!');
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Login</Text>
+      <Text style={styles.title}>Register</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Name"
+        value={name}
+        onChangeText={setName}
+      />
       <TextInput
         style={styles.input}
         placeholder="Email"
@@ -39,14 +71,14 @@ const LoginScreen = ({ navigation }) => {
         onChangeText={setPassword}
         secureTextEntry
       />
-      <TouchableOpacity style={styles.button} onPress={validateAndLogin}>
-        <Text style={styles.buttonText}>Login</Text>
+      <TouchableOpacity style={styles.button} onPress={validateAndRegister}>
+        <Text style={styles.buttonText}>Register</Text>
       </TouchableOpacity>
       <Text
         style={styles.link}
-        onPress={() => navigation.navigate('Register')}
+        onPress={() => navigation.navigate('Login')}
       >
-        Don’t have an account? Register
+        Already have an account? Login
       </Text>
     </View>
   );
@@ -55,16 +87,16 @@ const LoginScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
     justifyContent: 'center',
+    padding: 20,
     backgroundColor: '#f0f9f0',
   },
   title: {
     fontSize: 24,
-    marginBottom: 20,
     textAlign: 'center',
-    fontWeight: 'bold',
+    marginBottom: 20,
     color: '#2e7d32',
+    fontWeight: 'bold',
   },
   input: {
     borderWidth: 1,
@@ -93,4 +125,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginScreen;
+export default RegisterScreen;
