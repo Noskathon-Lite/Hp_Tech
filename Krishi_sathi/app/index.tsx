@@ -4,13 +4,13 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen from '../Components/LoginScreen';
 import RegisterScreen from '../Components/RegisterScreen';
 import  ProductForm from '../Components/ProductForm';
-
+import  SeedVisualizer from '../Components/SeedVisualizer';
 
 const Stack = createNativeStackNavigator();
 
 const App = () => {
   return (
-    // <NavigationContainer>
+    // <NavigationContainer> 
       <Stack.Navigator initialRouteName="Login">
         <Stack.Screen 
           name="Login" 
@@ -25,6 +25,12 @@ const App = () => {
         <Stack.Screen 
           name="ProductForm" 
           component={ProductForm} 
+          options={{ headerShown: false }} 
+        />
+
+<Stack.Screen 
+          name="SeedVisualizer" 
+          component={SeedVisualizer} 
           options={{ headerShown: false }} 
         />
       </Stack.Navigator>
