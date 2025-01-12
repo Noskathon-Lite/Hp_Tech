@@ -5,6 +5,8 @@ import LoginScreen from '../Components/LoginScreen';
 import RegisterScreen from '../Components/RegisterScreen';
 import  ProductForm from '../Components/ProductForm';
 import  SeedVisualizer from '../Components/SeedVisualizer';
+import HomePage from '../Components/HomePage'
+
 
 const Stack = createNativeStackNavigator();
 
@@ -31,6 +33,11 @@ const App = () => {
 <Stack.Screen 
           name="SeedVisualizer" 
           component={SeedVisualizer} 
+          />
+          
+         <Stack.Screen 
+          name="HomePage" 
+          component={HomePage} 
           options={{ headerShown: false }} 
         />
       </Stack.Navigator>
