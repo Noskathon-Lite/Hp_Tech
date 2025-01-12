@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, FlatList, Image, StyleSheet, Alert, ActivityIndicator } from 'react-native';
 import { db } from '../firebase';
 import { collection, getDocs } from 'firebase/firestore';
-import { Colors } from '../Colors';  // Import Colors.ts for styling
+import { Colors } from '../constants/Colors';
+import agriImage from '../assets/images/agri.webp'; // Import the local image
 
 const HomePage = ({ navigation }) => {
   const [products, setProducts] = useState([]);
@@ -25,17 +26,6 @@ const HomePage = ({ navigation }) => {
     fetchProducts();
   }, []);
 
-  const renderProduct = ({ item }) => (
-    <View style={styles.productCard}>
-      <Image source={{ uri: item.image }} style={styles.productImage} />
-      <View style={styles.productDetails}>
-        <Text style={styles.productName}>{item.productName}</Text>
-        <Text style={styles.productDescription}>{item.description}</Text>
-        <Text style={styles.productPrice}>${item.price}</Text>
-      </View>
-    </View>
-  );
-
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -48,12 +38,19 @@ const HomePage = ({ navigation }) => {
         </TouchableOpacity>
       </View>
 
+      {/* Agriculture Image */}
+      <View style={styles.imageContainer}>
+        <Image 
+          source={agriImage}  // Use the imported local image
+          style={styles.image} 
+        />
+      </View>
+
       {loading ? (
         <ActivityIndicator size="large" color={Colors.light.tint} />
       ) : (
         <FlatList
           data={products}
-          renderItem={renderProduct}
           keyExtractor={item => item.id}
           contentContainerStyle={styles.productList}
         />
@@ -90,41 +87,18 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
   },
+  imageContainer: {
+    marginBottom: 20,
+    alignItems: 'center',
+  },
+  image: {
+    width: '100%',
+    height: 200,
+    resizeMode: 'cover',
+    borderRadius: 10,
+  },
   productList: {
     paddingBottom: 20,
-  },
-  productCard: {
-    flexDirection: 'row',
-    marginBottom: 15,
-    borderWidth: 1,
-    borderColor: '#ddd',
-    borderRadius: 10,
-    overflow: 'hidden',
-    backgroundColor: '#fff',
-  },
-  productImage: {
-    width: 100,
-    height: 100,
-    resizeMode: 'cover',
-  },
-  productDetails: {
-    padding: 10,
-    flex: 1,
-  },
-  productName: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: Colors.light.text,
-  },
-  productDescription: {
-    fontSize: 14,
-    color: Colors.light.icon,
-  },
-  productPrice: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: Colors.light.tint,
-    marginTop: 5,
   },
 });
 

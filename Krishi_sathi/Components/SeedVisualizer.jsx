@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, FlatList, Image, ActivityIndicator, StyleSheet } from "react-native";
-import React, { useState } from 'react';
+
 
 
 import { db } from '../firebase';

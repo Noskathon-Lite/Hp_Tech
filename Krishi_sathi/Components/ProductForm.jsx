@@ -47,6 +47,7 @@ const ProductForm = () => {
       setPrice('');
       setImage('');
       setDescription('');
+      navigation.navigate('HomePage')
     } catch (error) {
       Alert.alert('Error', 'Failed to submit product. Please try again.');
       console.error(error);
@@ -62,7 +63,7 @@ const ProductForm = () => {
         value={productName}
         onChangeText={setProductName}
       />
-      <TextInput
+      <TextInput 
         style={styles.input}
         placeholder="Quantity"
         value={quantity}
