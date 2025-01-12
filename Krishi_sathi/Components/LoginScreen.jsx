@@ -19,7 +19,7 @@ const LoginScreen = ({ navigation }) => {
       return;
     }
     Alert.alert('Success', 'Logged in successfully!');
-    navigation.navigate('ProductForm')
+    navigation.navigate('HomePage')
   };
 
   return (

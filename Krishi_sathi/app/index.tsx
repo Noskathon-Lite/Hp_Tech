@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen from '../Components/LoginScreen';
 import RegisterScreen from '../Components/RegisterScreen';
 import  ProductForm from '../Components/ProductForm';
+import HomePage from '../Components/HomePage'
 
 
 const Stack = createNativeStackNavigator();
@@ -25,6 +26,11 @@ const App = () => {
         <Stack.Screen 
           name="ProductForm" 
           component={ProductForm} 
+          options={{ headerShown: false }} 
+        />
+         <Stack.Screen 
+          name="HomePage" 
+          component={HomePage} 
           options={{ headerShown: false }} 
         />
       </Stack.Navigator>
