@@ -30,23 +30,21 @@ const DetectSoil = () => {
   const suggestSeeds = (moistureLevel) => {
     const seedSuggestions = [];
 
-    if (moistureLevel > 30) {
+    if (moistureLevel <= 300) {
         seedSuggestions.push(
           { name: 'धान (Rice)', description: 'धानलाई प्राय: उच्च आर्द्रतामा राम्रोसँग हुर्कन सकिन्छ। यसलाई धानखेतीका लागि आदर्श मानिन्छ।', image: 'https://upload.wikimedia.org/wikipedia/commons/6/63/Rice.jpg', moistureRange: '40-80%' },
           { name: 'कमल (Lotus)', description: 'कमल फूलहरू प्राय: पानीमा मात्र हुर्कन्छ। यसका लागि उच्च आर्द्रता आवश्यक छ।', image: 'https://upload.wikimedia.org/wikipedia/commons/5/52/Nelumbo_nucifera_open_flower_-_botanic_garden_adelaide2.jpg', moistureRange: '50-70%' },
           { name: 'ऊखु (Sugarcane)', description: 'ऊखुलाई उष्णकटिबंधीय अवस्थाहरू आवश्यक पर्छ। यसलाई पर्याप्त आर्द्रता चाहिन्छ।', image: 'https://upload.wikimedia.org/wikipedia/commons/2/27/Sugarcane_field.jpg', moistureRange: '40-60%' },
           { name: 'केरा (Banana)', description: 'केरा प्राय: नमीयुक्त माटोमा उत्कृष्ट फल्छ। यसका लागि उच्च आर्द्रता आवश्यक छ।', image: 'https://upload.wikimedia.org/wikipedia/commons/4/41/Banana_tree.jpg', moistureRange: '50-70%' },
-          { name: 'नारिवल (Coconut)', description: 'नारिवल प्राय: तटीय क्षेत्रमा राम्रोसँग हुर्कन्छ। यसलाई आर्द्र माटो चाहिन्छ।', image: 'https://upload.wikimedia.org/wikipedia/commons/b/b4/Coconut_palms.jpg', moistureRange: '40-60%' },
-          { name: 'मेवा (Papaya)', description: 'मेवालाई उष्णकटिबंधीय जलवायुमा फलाउन सकिन्छ। यसले राम्रो उपज दिन उच्च आर्द्रता आवश्यक पर्छ।', image: 'https://upload.wikimedia.org/wikipedia/commons/8/8e/Carica_papaya_1.jpg', moistureRange: '40-60%' }
+          { name: 'नारिवल (Coconut)', description: 'नारिवल प्राय: तटीय क्षेत्रमा राम्रोसँग हुर्कन्छ। यसलाई आर्द्र माटो चाहिन्छ।', image: 'https://upload.wikimedia.org/wikipedia/commons/b/b4/Coconut_palms.jpg', moistureRange: '40-60%' }
         );
-      } else if (moistureLevel > 20) {
+      } else if (moistureLevel <=500) {
         seedSuggestions.push(
           { name: 'गहुँ (Wheat)', description: 'गहुँलाई मध्यम आर्द्रता आवश्यक पर्छ। यसलाई प्राय: शीतकालीन क्षेत्रमा फलाइन्छ।', image: 'https://upload.wikimedia.org/wikipedia/commons/c/c5/Wheat_field_in_Nord_Jutland_Denmark.JPG', moistureRange: '20-40%' },
           { name: 'मकै (Corn)', description: 'मकै मध्यम आर्द्रतामा राम्रोसँग हुर्कन्छ। यसलाई उच्च तापमान पनि सहन सक्छ।', image: 'https://upload.wikimedia.org/wikipedia/commons/8/88/Zea_mays_-_corn.jpg', moistureRange: '25-45%' },
           { name: 'आलु (Potato)', description: 'आलु प्राय: मध्यम पानी आवश्यक पर्ने बाली हो। यसलाई धेरै उच्च आर्द्रता चाहिँदैन।', image: 'https://upload.wikimedia.org/wikipedia/commons/d/d1/Potato_field.jpg', moistureRange: '30-50%' },
           { name: 'प्याज (Onion)', description: 'प्याजलाई न्यून पानी आवश्यकता हुन्छ। यसलाई मध्यम आर्द्रतामा राम्रो उत्पादन हुन्छ।', image: 'https://upload.wikimedia.org/wikipedia/commons/a/a2/Onion_vegetable.jpg', moistureRange: '20-30%' },
-          { name: 'बन्दाकोपी (Cabbage)', description: 'बन्दाकोपी प्राय: मध्यम पानी र तापमानमा राम्रो उत्पादन दिन्छ।', image: 'https://upload.wikimedia.org/wikipedia/commons/e/ed/Cabbage.jpg', moistureRange: '30-40%' },
-          { name: 'केराउ (Peas)', description: 'केराउलाई चिसो जलवायु मन पर्छ। यसलाई मध्यम आर्द्रता आवश्यक पर्छ।', image: 'https://upload.wikimedia.org/wikipedia/commons/e/e9/Peas_in_pods_-_Studio.jpg', moistureRange: '20-30%' }
+          { name: 'बन्दाकोपी (Cabbage)', description: 'बन्दाकोपी प्राय: मध्यम पानी र तापमानमा राम्रो उत्पादन दिन्छ।', image: 'https://upload.wikimedia.org/wikipedia/commons/e/ed/Cabbage.jpg', moistureRange: '30-40%' }
         );
       } else {
         seedSuggestions.push(
@@ -54,8 +52,7 @@ const DetectSoil = () => {
           { name: 'जौं (Barley)', description: 'जौंलाई शुष्क मौसम मन पर्छ। यसले न्यून आर्द्रता पनि सहन सक्छ।', image: 'https://upload.wikimedia.org/wikipedia/commons/e/e7/Barley_field.jpg', moistureRange: '15-25%' },
           { name: 'फर्सी (Pumpkin)', description: 'फर्सीलाई शुष्क वातावरणमा फलाउन सकिन्छ। यसले थोरै पानीमा राम्रो उत्पादन दिन्छ।', image: 'https://upload.wikimedia.org/wikipedia/commons/c/cb/Pumpkin_in_field.jpg', moistureRange: '10-20%' },
           { name: 'गाजर (Carrot)', description: 'गाजर न्यून पानीमा हुर्कन सकिन्छ। यसले शुष्क माटोमा पनि उत्पादन दिन्छ।', image: 'https://upload.wikimedia.org/wikipedia/commons/d/d4/Carrot.jpg', moistureRange: '10-30%' },
-          { name: 'सूर्यमुखी (Sunflower)', description: 'सूर्यमुखी प्राय: घामको रुख तिर बढ्छ। यसलाई न्यून आर्द्रता चाहिन्छ।', image: 'https://upload.wikimedia.org/wikipedia/commons/4/40/Sunflower.jpg', moistureRange: '15-25%' },
-          { name: 'खुर्सानी (Capsicum)', description: 'खुर्सानीलाई गर्मी वातावरणमा हुर्काउन सकिन्छ। यसलाई मध्यम आर्द्रता आवश्यक पर्छ।', image: 'https://upload.wikimedia.org/wikipedia/commons/6/65/Capsicum_annuum.jpg', moistureRange: '20-35%' }
+          { name: 'सूर्यमुखी (Sunflower)', description: 'सूर्यमुखी प्राय: घामको रुख तिर बढ्छ। यसलाई न्यून आर्द्रता चाहिन्छ।', image: 'https://upload.wikimedia.org/wikipedia/commons/4/40/Sunflower.jpg', moistureRange: '15-25%' }
         );
       }
 
