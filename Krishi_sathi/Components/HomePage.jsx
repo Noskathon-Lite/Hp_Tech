@@ -1,129 +1,238 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity, FlatList, Image, StyleSheet, Alert, ActivityIndicator } from 'react-native';
-import { db } from '../firebase';
-import { collection, getDocs } from 'firebase/firestore';
+import React from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 import { Colors } from '../constants/Colors';
-import agriImage from '../assets/images/agri.webp'; // Local agriculture image
-import logo from '../assets/images/logo.png'; // Local logo image
 
 const HomePage = ({ navigation }) => {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const querySnapshot = await getDocs(collection(db, 'products'));
-        const productsList = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        setProducts(productsList);
-      } catch (error) {
-        Alert.alert('Error', 'Failed to load products.');
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProducts();
-  }, []);
-
   return (
-    <View style={styles.container}>
-      {/* Header */}
+    <ScrollView style={styles.container}>
+      {/* Header Section */}
       <View style={styles.header}>
-        <Image source={logo} style={styles.logo} /> {/* Logo */}
-        <Text style={styles.headerTitle}>Home</Text>
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('ProductForm')}>
-          <Text style={styles.buttonText}>Add Product</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('RegisterScreen')}>
-          <Text style={styles.buttonText}>Register</Text>
+        <View>
+          <Text style={styles.greeting}>Hello, John</Text>
+          <Text style={styles.subGreeting}>It's a sunny day!</Text>
+        </View>
+        <TouchableOpacity style={styles.locationButton}>
+          <Text style={styles.locationText}>Rajkot</Text>
         </TouchableOpacity>
       </View>
 
-      {/* Agriculture Image */}
-      <View style={styles.imageContainer}>
-        <Image source={agriImage} style={styles.image} />
-        <Text style={styles.motto}>
-          "Empowering Agriculture, Cultivating Dreams."
-        </Text>
-        <Text style={styles.description}>
-          Together, we grow a greener and sustainable future for everyone.
+      {/* Weather Info
+      <View style={styles.weatherCard}>
+        <View style={styles.weatherItem}>
+          <Text style={styles.weatherValue}>62° F</Text>
+          <Text style={styles.weatherLabel}>Temperature</Text>
+        </View>
+        <View style={styles.weatherItem}>
+          <Text style={styles.weatherValue}>61%</Text>
+          <Text style={styles.weatherLabel}>Humidity</Text>
+        </View>
+        <View style={styles.weatherItem}>
+          <Text style={styles.weatherValue}>0.0mm</Text>
+          <Text style={styles.weatherLabel}>Rainfall</Text>
+        </View>
+        <View style={styles.weatherItem}>
+          <Text style={styles.weatherValue}>3.9m/s</Text>
+          <Text style={styles.weatherLabel}>WindSpeed</Text>
+        </View>
+      </View> */}
+
+      {/* Image and Text Below Weather Info */}
+      <View style={styles.imageTextSection}>
+        <Image source={require('../assets/images/agri.webp')} style={styles.agriImage} />
+        <Text style={styles.agriText}>
+          Discover the best agricultural solutions for your needs!
         </Text>
       </View>
 
-      {loading ? (
-        <ActivityIndicator size="large" color={Colors.light.tint} />
-      ) : (
-        <FlatList
-          data={products}
-          keyExtractor={item => item.id}
-          contentContainerStyle={styles.productList}
-        />
-      )}
-    </View>
+      {/* Diagnosis Button */}
+      <TouchableOpacity style={styles.diagnosisButton}>
+        <Text style={styles.diagnosisText}>Diagnosis issues with crop</Text>
+      </TouchableOpacity>
+
+      {/* Seed Section */}
+      <Text style={styles.sectionTitle}>Seeds</Text>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.gallery}>
+        <Image style={styles.galleryImage} source={require('../assets/images/logo.png')} />
+        <Image style={styles.galleryImage} source={require('../assets/images/logo.png')} />
+        <Image style={styles.galleryImage} source={require('../assets/images/logo.png')} />
+        <Image style={styles.galleryImage} source={require('../assets/images/logo.png')} />
+      </ScrollView>
+
+      {/* Buttons Below Seed Section */}
+      <View style={styles.buttonsContainer}>
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.buttonText}>Seeds</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.buttonText}>Plants</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.buttonText}>Soil Test</Text>
+        </TouchableOpacity>
+      </View>
+
+      {/* Trending Diseases */}
+      <Text style={styles.sectionTitle}>Trending Diseases</Text>
+      <View style={styles.trendingCard}>
+        <Image style={styles.trendingImage} source={require('../assets/images/logo.png')} />
+        <View>
+          <Text style={styles.trendingTitle}>African Mole Cricket</Text>
+          <Text style={styles.trendingCategory}>🪲 Insect</Text>
+        </View>
+      </View>
+
+      {/* Best Crop Section */}
+      <Text style={styles.sectionTitle}>Best Crop to Plant</Text>
+      <Text style={styles.bestCropText}>Corn, Wheat, and Barley are optimal for this season!</Text>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#e8f5e9', // Light green background for greenery
-    padding: 20,
+    backgroundColor: Colors.light.background,
+    padding: 15,
   },
   header: {
     flexDirection: 'row',
-    alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: 20,
-  },
-  logo: {
-    width: 40,
-    height: 40,
-    resizeMode: 'contain',
-  },
-  headerTitle: {
-    fontSize: 28,
-    color: Colors.light.text,
-    fontWeight: 'bold',
-    flex: 1,
-    textAlign: 'center',
-  },
-  button: {
-    backgroundColor: Colors.light.tint,
-    padding: 10,
-    borderRadius: 5,
-    marginLeft: 5,
-  },
-  buttonText: {
-    color: '#fff',
-    fontWeight: 'bold',
-  },
-  imageContainer: {
-    marginBottom: 20,
     alignItems: 'center',
-  },
-  image: {
-    width: '100%',
-    height: 200,
-    resizeMode: 'cover',
+    marginBottom: 20,
+    backgroundColor: Colors.light.green,
+    padding: 20,
     borderRadius: 10,
   },
-  motto: {
-    marginTop: 15,
+  greeting: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#fff',
+  },
+  subGreeting: {
+    fontSize: 16,
+    color: '#fff',
+  },
+  locationButton: {
+    backgroundColor: '#fff',
+    padding: 10,
+    borderRadius: 20,
+  },
+  locationText: {
+    color: Colors.light.green,
+    fontWeight: 'bold',
+  },
+  weatherCard: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    padding: 20,
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    marginBottom: 20,
+  },
+  weatherItem: {
+    alignItems: 'center',
+  },
+  weatherValue: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: Colors.light.green,
+  },
+  weatherLabel: {
+    fontSize: 14,
+    color: '#888',
+  },
+  imageTextSection: {
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  agriImage: {
+    width: '100%',
+    height: 150,
+    borderRadius: 10,
+    marginBottom: 10,
+  },
+  agriText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: Colors.light.text,
+  },
+  diagnosisButton: {
+    backgroundColor: Colors.light.green,
+    padding: 15,
+    borderRadius: 10,
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  diagnosisText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  sectionTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#1b5e20', // Dark green for emphasis
-    textAlign: 'center',
+    marginBottom: 10,
   },
-  description: {
-    marginTop: 5,
+  gallery: {
+    flexDirection: 'row',
+    marginBottom: 20,
+  },
+  galleryImage: {
+    width: 100,
+    height: 100,
+    borderRadius: 10,
+    marginRight: 10,
+  },
+  buttonsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginBottom: 20,
+  },
+  button: {
+    backgroundColor: Colors.light.green,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 10,
+  },
+  buttonText: {
+    color: '#333',
     fontSize: 16,
-    color: '#4caf50', // Light green for harmony
-    textAlign: 'center',
+    fontWeight: 'bold',
   },
-  productList: {
-    paddingBottom: 20,
+  trendingCard: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    padding: 15,
+    borderRadius: 10,
+    marginBottom: 20,
+  },
+  trendingImage: {
+    width: 60,
+    height: 60,
+    borderRadius: 10,
+    marginRight: 10,
+  },
+  trendingTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  trendingCategory: {
+    fontSize: 14,
+    color: Colors.light.green,
+  },
+  bestCropText: {
+    fontSize: 16,
+    color: '#666',
+    marginBottom: 20,
   },
 });
 
