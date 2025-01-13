@@ -6,6 +6,8 @@ import RegisterScreen from '../Components/RegisterScreen';
 import ProductForm from '../Components/ProductForm';
 import SeedVisualizer from '../Components/SeedVisualizer';
 import HomePage from '../Components/HomePage';
+import DetectSoil from '../Components/DetectSoil';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -31,6 +33,12 @@ const App = () => {
         <Stack.Screen
           name="Register"
           component={RegisterScreen}
+          options={{ headerShown: false }}
+        />
+
+<Stack.Screen
+          name="DetectSoil"
+          component={DetectSoil}
           options={{ headerShown: false }}
         />
         <Stack.Screen
