@@ -15,7 +15,7 @@ const App = () => {
 
   return (
     
-      <Stack.Navigator initialRouteName={isLoggedIn ? 'HomePage' : 'Login'}>
+      <Stack.Navigator initialRouteName={'HomePage'}>
         <Stack.Screen
           name="Login"
           options={{ headerShown: false }}

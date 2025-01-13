@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet } from 'react-native';
+import { collection, query, where, getDocs } from 'firebase/firestore';
+import { db } from '../firebase'; // Adjust this path
 
-const LoginScreen = ({ navigation }) => {
+const LoginScreen = ({ navigation, setIsLoggedIn, setUserName }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const validateAndLogin = () => {
+  const validateAndLogin = async () => {
     if (!email) {
       Alert.alert('Error', 'Email is required.');
       return;
@@ -18,8 +20,31 @@ const LoginScreen = ({ navigation }) => {
       Alert.alert('Error', 'Password is required.');
       return;
     }
-    Alert.alert('Success', 'Logged in successfully!');
-    navigation.navigate('HomePage')
+
+    try {
+      const usersRef = collection(db, 'users');
+      const q = query(usersRef, where('email', '==', email));
+      const querySnapshot = await getDocs(q);
+
+      if (!querySnapshot.empty) {
+        const userDoc = querySnapshot.docs[0];
+        const userData = userDoc.data();
+
+        if (userData.password === password) {
+          Alert.alert('Success', 'Logged in successfully!');
+          setIsLoggedIn(true);
+          setUserName(userData.name || 'User'); // Assuming "name" exists in Firestore
+          navigation.navigate('HomePage');
+        } else {
+          Alert.alert('Error', 'Incorrect password.');
+        }
+      } else {
+        Alert.alert('Error', 'No user found with this email.');
+      }
+    } catch (error) {
+      Alert.alert('Error', 'Something went wrong. Please try again later.');
+      console.error(error);
+    }
   };
 
   return (
