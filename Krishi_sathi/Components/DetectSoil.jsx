@@ -32,15 +32,14 @@ const DetectSoil = () => {
 
     if (moistureLevel <= 300) {
         seedSuggestions.push(
-          { name: 'धान (Rice)', description: 'धानलाई प्राय: उच्च आर्द्रतामा राम्रोसँग हुर्कन सकिन्छ। यसलाई धानखेतीका लागि आदर्श मानिन्छ।', image: 'https://upload.wikimedia.org/wikipedia/commons/6/63/Rice.jpg', moistureRange: '40-80%' },
-          { name: 'कमल (Lotus)', description: 'कमल फूलहरू प्राय: पानीमा मात्र हुर्कन्छ। यसका लागि उच्च आर्द्रता आवश्यक छ।', image: 'https://upload.wikimedia.org/wikipedia/commons/5/52/Nelumbo_nucifera_open_flower_-_botanic_garden_adelaide2.jpg', moistureRange: '50-70%' },
-          { name: 'ऊखु (Sugarcane)', description: 'ऊखुलाई उष्णकटिबंधीय अवस्थाहरू आवश्यक पर्छ। यसलाई पर्याप्त आर्द्रता चाहिन्छ।', image: 'https://upload.wikimedia.org/wikipedia/commons/2/27/Sugarcane_field.jpg', moistureRange: '40-60%' },
-          { name: 'केरा (Banana)', description: 'केरा प्राय: नमीयुक्त माटोमा उत्कृष्ट फल्छ। यसका लागि उच्च आर्द्रता आवश्यक छ।', image: 'https://upload.wikimedia.org/wikipedia/commons/4/41/Banana_tree.jpg', moistureRange: '50-70%' },
-          { name: 'नारिवल (Coconut)', description: 'नारिवल प्राय: तटीय क्षेत्रमा राम्रोसँग हुर्कन्छ। यसलाई आर्द्र माटो चाहिन्छ।', image: 'https://upload.wikimedia.org/wikipedia/commons/b/b4/Coconut_palms.jpg', moistureRange: '40-60%' }
+          { name: 'धान (Rice)', description: 'धानलाई प्राय: उच्च आर्द्रतामा राम्रोसँग हुर्कन सकिन्छ। यसलाई धानखेतीका लागि आदर्श मानिन्छ।', image: 'https://images.pexels.com/photos/2589457/pexels-photo-2589457.jpeg?auto=compress&cs=tinysrgb&w=400', moistureRange: '50-70%' },
+          { name: 'ऊखु (Sugarcane)', description: 'ऊखुलाई उष्णकटिबंधीय अवस्थाहरू आवश्यक पर्छ। यसलाई पर्याप्त आर्द्रता चाहिन्छ।', image: 'https://media.istockphoto.com/id/965303384/photo/the-sugar-cane.jpg?s=612x612&w=0&k=20&c=-nwpqHxhmDCaB9s8KfR15ZnMVbos6yQ39Yl0vzCOt2E=', moistureRange: '40-60%' },
+          { name: 'केरा (Banana)', description: 'केरा प्राय: नमीयुक्त माटोमा उत्कृष्ट फल्छ। यसका लागि उच्च आर्द्रता आवश्यक छ।', image: 'https://cdn.pixabay.com/photo/2024/04/25/06/50/banana-8719086_1280.jpg', moistureRange: '50-70%' },
+          { name: 'नारिवल (Coconut)', description: 'नारिवल प्राय: तटीय क्षेत्रमा राम्रोसँग हुर्कन्छ। यसलाई आर्द्र माटो चाहिन्छ।', image: 'https://cdn.pixabay.com/photo/2016/03/26/22/48/tree-1281680_640.jpg', moistureRange: '40-60%' }
         );
       } else if (moistureLevel <=500) {
         seedSuggestions.push(
-          { name: 'गहुँ (Wheat)', description: 'गहुँलाई मध्यम आर्द्रता आवश्यक पर्छ। यसलाई प्राय: शीतकालीन क्षेत्रमा फलाइन्छ।', image: 'https://upload.wikimedia.org/wikipedia/commons/c/c5/Wheat_field_in_Nord_Jutland_Denmark.JPG', moistureRange: '20-40%' },
+          { name: 'गहुँ (Wheat)', description: 'गहुँलाई मध्यम आर्द्रता आवश्यक पर्छ। यसलाई प्राय: शीतकालीन क्षेत्रमा फलाइन्छ।', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSXUA7lHq-tPoSNEXoich81bd0TkAbUrAxxw&s', moistureRange: '20-40%' },
           { name: 'मकै (Corn)', description: 'मकै मध्यम आर्द्रतामा राम्रोसँग हुर्कन्छ। यसलाई उच्च तापमान पनि सहन सक्छ।', image: 'https://upload.wikimedia.org/wikipedia/commons/8/88/Zea_mays_-_corn.jpg', moistureRange: '25-45%' },
           { name: 'आलु (Potato)', description: 'आलु प्राय: मध्यम पानी आवश्यक पर्ने बाली हो। यसलाई धेरै उच्च आर्द्रता चाहिँदैन।', image: 'https://upload.wikimedia.org/wikipedia/commons/d/d1/Potato_field.jpg', moistureRange: '30-50%' },
           { name: 'प्याज (Onion)', description: 'प्याजलाई न्यून पानी आवश्यकता हुन्छ। यसलाई मध्यम आर्द्रतामा राम्रो उत्पादन हुन्छ।', image: 'https://upload.wikimedia.org/wikipedia/commons/a/a2/Onion_vegetable.jpg', moistureRange: '20-30%' },
