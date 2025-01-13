@@ -14,7 +14,7 @@ const DetectSoil = () => {
     try {
       // Mock data (Replace this with real Firebase data fetching)
       const mockMoistureData = {
-        moisture: 10, // Example value for testing
+        moisture: 25, // Example value for testing
       };
 
       setMoisture(mockMoistureData.moisture);

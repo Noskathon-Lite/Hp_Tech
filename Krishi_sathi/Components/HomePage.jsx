@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { Colors } from '../constants/Colors';
 
-const HomePage = ({ navigation, isLoggedIn, userProfilePic }) => {
+const HomePage = ({ navigation, isLoggedIn, userName }) => {
   return (
     <ScrollView style={styles.container}>
       {/* Header Section */}
@@ -24,10 +24,7 @@ const HomePage = ({ navigation, isLoggedIn, userProfilePic }) => {
         {/* Register/Login or Profile Section */}
         {isLoggedIn ? (
           <TouchableOpacity style={styles.profileButton}>
-            <Image
-              source={{ uri: userProfilePic }}
-              style={styles.profileImage}
-            />
+            <Text style={styles.userNameText}>{userName}</Text>
           </TouchableOpacity>
         ) : (
           <View style={styles.authButtons}>
@@ -37,6 +34,8 @@ const HomePage = ({ navigation, isLoggedIn, userProfilePic }) => {
             >
               <Text style={styles.authButtonText}>Register</Text>
             </TouchableOpacity>
+
+           
             <TouchableOpacity
               style={styles.authButton}
               onPress={() => navigation.navigate('Login')}
@@ -110,7 +109,13 @@ const HomePage = ({ navigation, isLoggedIn, userProfilePic }) => {
           source={require('../assets/images/logo.png')}
         />
       </ScrollView>
+      <TouchableOpacity 
+            style={styles.button} 
+            onPress={() => navigation.navigate('DetectSoil')}> 
+            <Text style={styles.buttonText}>Detect Soil</Text> 
+            </TouchableOpacity> 
     </ScrollView>
+    
   );
 };
 
@@ -153,14 +158,16 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   profileButton: {
-    width: 50,
-    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 10,
+    backgroundColor: '#fff',
     borderRadius: 25,
-    overflow: 'hidden',
   },
-  profileImage: {
-    width: '100%',
-    height: '100%',
+  userNameText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: Colors.light.green,
   },
   namaskarText: {
     fontSize: 24,
