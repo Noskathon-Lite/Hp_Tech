@@ -23,7 +23,7 @@ const HomePage = ({ navigation }) => {
         </TouchableOpacity>
       </View>
 
-      {/* Weather Info */}
+      {/* Weather Info
       <View style={styles.weatherCard}>
         <View style={styles.weatherItem}>
           <Text style={styles.weatherValue}>62° F</Text>
@@ -41,6 +41,14 @@ const HomePage = ({ navigation }) => {
           <Text style={styles.weatherValue}>3.9m/s</Text>
           <Text style={styles.weatherLabel}>WindSpeed</Text>
         </View>
+      </View> */}
+
+      {/* Image and Text Below Weather Info */}
+      <View style={styles.imageTextSection}>
+        <Image source={require('../assets/images/agri.webp')} style={styles.agriImage} />
+        <Text style={styles.agriText}>
+          Discover the best agricultural solutions for your needs!
+        </Text>
       </View>
 
       {/* Diagnosis Button */}
@@ -48,14 +56,27 @@ const HomePage = ({ navigation }) => {
         <Text style={styles.diagnosisText}>Diagnosis issues with crop</Text>
       </TouchableOpacity>
 
-      {/* Gallery Section */}
-      <Text style={styles.sectionTitle}>Gallery</Text>
+      {/* Seed Section */}
+      <Text style={styles.sectionTitle}>Seeds</Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.gallery}>
         <Image style={styles.galleryImage} source={require('../assets/images/logo.png')} />
         <Image style={styles.galleryImage} source={require('../assets/images/logo.png')} />
         <Image style={styles.galleryImage} source={require('../assets/images/logo.png')} />
         <Image style={styles.galleryImage} source={require('../assets/images/logo.png')} />
       </ScrollView>
+
+      {/* Buttons Below Seed Section */}
+      <View style={styles.buttonsContainer}>
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.buttonText}>Seeds</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.buttonText}>Plants</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.buttonText}>Soil Test</Text>
+        </TouchableOpacity>
+      </View>
 
       {/* Trending Diseases */}
       <Text style={styles.sectionTitle}>Trending Diseases</Text>
@@ -127,6 +148,22 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#888',
   },
+  imageTextSection: {
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  agriImage: {
+    width: '100%',
+    height: 150,
+    borderRadius: 10,
+    marginBottom: 10,
+  },
+  agriText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: Colors.light.text,
+  },
   diagnosisButton: {
     backgroundColor: Colors.light.green,
     padding: 15,
@@ -153,6 +190,22 @@ const styles = StyleSheet.create({
     height: 100,
     borderRadius: 10,
     marginRight: 10,
+  },
+  buttonsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginBottom: 20,
+  },
+  button: {
+    backgroundColor: Colors.light.green,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 10,
+  },
+  buttonText: {
+    color: '#333',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
   trendingCard: {
     flexDirection: 'row',
