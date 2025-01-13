@@ -109,10 +109,12 @@ const HomePage = ({ navigation, isLoggedIn, userName }) => {
           source={require('../assets/images/logo.png')}
         />
       </ScrollView>
+
+
       <TouchableOpacity 
             style={styles.button} 
             onPress={() => navigation.navigate('DetectSoil')}> 
-            <Text style={styles.buttonText}>Detect Soil</Text> 
+            <Text style={styles.authButtonText}>Detect Soil</Text> 
             </TouchableOpacity> 
     </ScrollView>
     
