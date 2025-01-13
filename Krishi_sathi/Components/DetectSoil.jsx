@@ -30,7 +30,7 @@ const DetectSoil = () => {
   const suggestSeeds = (moistureLevel) => {
     const seedSuggestions = [];
 
-    if (moistureLevel > 30) {
+    if (moistureLevel <= 300) {
         seedSuggestions.push(
           { name: 'धान (Rice)', description: 'धानलाई प्राय: उच्च आर्द्रतामा राम्रोसँग हुर्कन सकिन्छ। यसलाई धानखेतीका लागि आदर्श मानिन्छ।', image: 'https://upload.wikimedia.org/wikipedia/commons/6/63/Rice.jpg', moistureRange: '40-80%' },
           { name: 'कमल (Lotus)', description: 'कमल फूलहरू प्राय: पानीमा मात्र हुर्कन्छ। यसका लागि उच्च आर्द्रता आवश्यक छ।', image: 'https://upload.wikimedia.org/wikipedia/commons/5/52/Nelumbo_nucifera_open_flower_-_botanic_garden_adelaide2.jpg', moistureRange: '50-70%' },
@@ -39,7 +39,7 @@ const DetectSoil = () => {
           { name: 'नारिवल (Coconut)', description: 'नारिवल प्राय: तटीय क्षेत्रमा राम्रोसँग हुर्कन्छ। यसलाई आर्द्र माटो चाहिन्छ।', image: 'https://upload.wikimedia.org/wikipedia/commons/b/b4/Coconut_palms.jpg', moistureRange: '40-60%' },
           { name: 'मेवा (Papaya)', description: 'मेवालाई उष्णकटिबंधीय जलवायुमा फलाउन सकिन्छ। यसले राम्रो उपज दिन उच्च आर्द्रता आवश्यक पर्छ।', image: 'https://upload.wikimedia.org/wikipedia/commons/8/8e/Carica_papaya_1.jpg', moistureRange: '40-60%' }
         );
-      } else if (moistureLevel > 20) {
+      } else if (moistureLevel <=500) {
         seedSuggestions.push(
           { name: 'गहुँ (Wheat)', description: 'गहुँलाई मध्यम आर्द्रता आवश्यक पर्छ। यसलाई प्राय: शीतकालीन क्षेत्रमा फलाइन्छ।', image: 'https://upload.wikimedia.org/wikipedia/commons/c/c5/Wheat_field_in_Nord_Jutland_Denmark.JPG', moistureRange: '20-40%' },
           { name: 'मकै (Corn)', description: 'मकै मध्यम आर्द्रतामा राम्रोसँग हुर्कन्छ। यसलाई उच्च तापमान पनि सहन सक्छ।', image: 'https://upload.wikimedia.org/wikipedia/commons/8/88/Zea_mays_-_corn.jpg', moistureRange: '25-45%' },
