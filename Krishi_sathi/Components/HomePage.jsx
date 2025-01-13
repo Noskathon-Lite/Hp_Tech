@@ -76,19 +76,19 @@ const HomePage = ({ navigation, isLoggedIn, userName }) => {
       >
         <Image
           style={styles.galleryImage}
-          source={require('../assets/images/logo.png')}
+          source={require('../assets/images/Onion-1.jpg')}
         />
         <Image
           style={styles.galleryImage}
-          source={require('../assets/images/logo.png')}
+          source={require('../assets/images/Onion-1.jpg')}
         />
         <Image
           style={styles.galleryImage}
-          source={require('../assets/images/logo.png')}
+          source={require('../assets/images/Onion-1.jpg')}
         />
         <Image
           style={styles.galleryImage}
-          source={require('../assets/images/logo.png')}
+          source={require('../assets/images/Onion-1.jpg')}
         />
       </ScrollView>
 
@@ -109,19 +109,19 @@ const HomePage = ({ navigation, isLoggedIn, userName }) => {
       >
         <Image
           style={styles.galleryImage}
-          source={require('../assets/images/logo.png')}
+          source={require('../assets/images/a.jpg')}
         />
         <Image
           style={styles.galleryImage}
-          source={require('../assets/images/logo.png')}
+          source={require('../assets/images/a.jpg')}
         />
         <Image
           style={styles.galleryImage}
-          source={require('../assets/images/logo.png')}
+          source={require('../assets/images/a.jpg')}
         />
         <Image
           style={styles.galleryImage}
-          source={require('../assets/images/logo.png')}
+          source={require('../assets/images/a.jpg')}
         />
       </ScrollView>
 
