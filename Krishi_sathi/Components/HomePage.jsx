@@ -1,129 +1,216 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity, FlatList, Image, StyleSheet, Alert, ActivityIndicator } from 'react-native';
-import { db } from '../firebase';
-import { collection, getDocs } from 'firebase/firestore';
+import React from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 import { Colors } from '../constants/Colors';
-import agriImage from '../assets/images/agri.webp'; // Local agriculture image
-import logo from '../assets/images/logo.png'; // Local logo image
 
-const HomePage = ({ navigation }) => {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const querySnapshot = await getDocs(collection(db, 'products'));
-        const productsList = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        setProducts(productsList);
-      } catch (error) {
-        Alert.alert('Error', 'Failed to load products.');
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProducts();
-  }, []);
-
+const HomePage = ({ navigation, isLoggedIn, userProfilePic }) => {
   return (
-    <View style={styles.container}>
-      {/* Header */}
+    <ScrollView style={styles.container}>
+      {/* Header Section */}
       <View style={styles.header}>
-        <Image source={logo} style={styles.logo} /> {/* Logo */}
-        <Text style={styles.headerTitle}>Home</Text>
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('ProductForm')}>
-          <Text style={styles.buttonText}>Add Product</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('RegisterScreen')}>
-          <Text style={styles.buttonText}>Register</Text>
-        </TouchableOpacity>
-      </View>
-
-      {/* Agriculture Image */}
-      <View style={styles.imageContainer}>
-        <Image source={agriImage} style={styles.image} />
-        <Text style={styles.motto}>
-          "Empowering Agriculture, Cultivating Dreams."
-        </Text>
-        <Text style={styles.description}>
-          Together, we grow a greener and sustainable future for everyone.
-        </Text>
-      </View>
-
-      {loading ? (
-        <ActivityIndicator size="large" color={Colors.light.tint} />
-      ) : (
-        <FlatList
-          data={products}
-          keyExtractor={item => item.id}
-          contentContainerStyle={styles.productList}
+        {/* Logo */}
+        <Image
+          source={require('../assets/images/logo.png')}
+          style={styles.logo}
         />
-      )}
-    </View>
+        {/* Header Title */}
+        <Text style={styles.headerTitle}>Home</Text>
+        {/* Register/Login or Profile Section */}
+        {isLoggedIn ? (
+          <TouchableOpacity style={styles.profileButton}>
+            <Image
+              source={{ uri: userProfilePic }}
+              style={styles.profileImage}
+            />
+          </TouchableOpacity>
+        ) : (
+          <View style={styles.authButtons}>
+            <TouchableOpacity
+              style={styles.authButton}
+              onPress={() => navigation.navigate('Register')}
+            >
+              <Text style={styles.authButtonText}>Register</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.authButton}
+              onPress={() => navigation.navigate('Login')}
+            >
+              <Text style={styles.authButtonText}>Login</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+      </View>
+
+      {/* Namaskar in Nepali */}
+      <Text style={styles.namaskarText}>नमस्कार, सन्चै हुनुहुन्छ?</Text>
+
+      {/* Image and Text Below Weather Info */}
+      <View style={styles.imageTextSection}>
+        <Image
+          source={require('../assets/images/agri.webp')}
+          style={styles.agriImage}
+        />
+        <Text style={styles.agriText}>
+          Discover the best agricultural solutions for your needs!
+        </Text>
+      </View>
+
+      {/* Seeds Section */}
+      <Text style={styles.sectionTitle}>Seeds</Text>
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        style={styles.gallery}
+      >
+        <Image
+          style={styles.galleryImage}
+          source={require('../assets/images/logo.png')}
+        />
+        <Image
+          style={styles.galleryImage}
+          source={require('../assets/images/logo.png')}
+        />
+        <Image
+          style={styles.galleryImage}
+          source={require('../assets/images/logo.png')}
+        />
+        <Image
+          style={styles.galleryImage}
+          source={require('../assets/images/logo.png')}
+        />
+      </ScrollView>
+
+      {/* Plants Section */}
+      <Text style={styles.sectionTitle}>Plants</Text>
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        style={styles.gallery}
+      >
+        <Image
+          style={styles.galleryImage}
+          source={require('../assets/images/logo.png')}
+        />
+        <Image
+          style={styles.galleryImage}
+          source={require('../assets/images/logo.png')}
+        />
+        <Image
+          style={styles.galleryImage}
+          source={require('../assets/images/logo.png')}
+        />
+        <Image
+          style={styles.galleryImage}
+          source={require('../assets/images/logo.png')}
+        />
+      </ScrollView>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#e8f5e9', // Light green background for greenery
-    padding: 20,
+    backgroundColor: Colors.light.green,
+    padding: 15,
   },
   header: {
     flexDirection: 'row',
-    alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: 20,
+    alignItems: 'center',
+    marginBottom: 10,
+    backgroundColor: Colors.light.green,
+    padding: 0,
+    borderRadius: 10,
   },
   logo: {
-    width: 40,
-    height: 40,
+    width: 75,
+    height: 80,
     resizeMode: 'contain',
   },
   headerTitle: {
-    fontSize: 28,
-    color: Colors.light.text,
+    fontSize: 24,
     fontWeight: 'bold',
-    flex: 1,
-    textAlign: 'center',
+    color: '#333',
   },
-  button: {
-    backgroundColor: Colors.light.tint,
+  authButtons: {
+    flexDirection: 'row',
+  },
+  authButton: {
+    backgroundColor: '#fff',
     padding: 10,
-    borderRadius: 5,
-    marginLeft: 5,
+    borderRadius: 20,
+    marginHorizontal: 5,
   },
-  buttonText: {
-    color: '#fff',
+  authButtonText: {
+    color: Colors.light.green,
     fontWeight: 'bold',
   },
-  imageContainer: {
-    marginBottom: 20,
-    alignItems: 'center',
+  profileButton: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    overflow: 'hidden',
   },
-  image: {
+  profileImage: {
     width: '100%',
-    height: 200,
-    resizeMode: 'cover',
-    borderRadius: 10,
+    height: '100%',
   },
-  motto: {
-    marginTop: 15,
+  namaskarText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: Colors.light.green,
+    marginBottom: 15,
+  },
+  imageTextSection: {
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  agriImage: {
+    width: '100%',
+    height: 150,
+    borderRadius: 10,
+    marginBottom: 10,
+  },
+  agriText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: Colors.light.text,
+  },
+  diagnosisButton: {
+    backgroundColor: Colors.light.green,
+    padding: 15,
+    borderRadius: 10,
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  diagnosisText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  sectionTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#1b5e20', // Dark green for emphasis
-    textAlign: 'center',
+    marginBottom: 10,
   },
-  description: {
-    marginTop: 5,
-    fontSize: 16,
-    color: '#4caf50', // Light green for harmony
-    textAlign: 'center',
+  gallery: {
+    flexDirection: 'row',
+    marginBottom: 20,
   },
-  productList: {
-    paddingBottom: 20,
+  galleryImage: {
+    width: 100,
+    height: 100,
+    borderRadius: 10,
+    marginRight: 10,
   },
 });
 
