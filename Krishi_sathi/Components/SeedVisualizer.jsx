@@ -1,14 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, FlatList, Image, ActivityIndicator, StyleSheet } from "react-native";
-import { db } from '../firebase';
-
+import {
+  View,
+  Text,
+  FlatList,
+  Image,
+  ActivityIndicator,
+  StyleSheet,
+} from "react-native";
+import { getDatabase, ref, onValue } from "firebase/database";
+import { app } from "../firebase"; // Ensure this imports your Firebase app initialization
 
 const SeedVisualizer = () => {
   const [seeds, setSeeds] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const seedsRef = db.ref("products");
+    const db = getDatabase(app); // Get the database instance
+    const seedsRef = ref(db, "products"); // Reference to the "products" node
+
     const handleData = (snapshot) => {
       const data = snapshot.val();
       if (data) {
@@ -23,9 +32,10 @@ const SeedVisualizer = () => {
       setLoading(false);
     };
 
-    seedsRef.on("value", handleData);
+    const unsubscribe = onValue(seedsRef, handleData);
 
-    return () => seedsRef.off("value", handleData); // Cleanup listener
+    // Cleanup listener on unmount
+    return () => unsubscribe();
   }, []);
 
   if (loading) {
@@ -57,7 +67,9 @@ const SeedVisualizer = () => {
                 <Text style={styles.seedTitle}>{item.productName}</Text>
                 <Text style={styles.seedText}>Price: ₹{item.price}</Text>
                 <Text style={styles.seedText}>Quantity: {item.quantity}</Text>
-                <Text style={styles.seedText}>Description: {item.description}</Text>
+                <Text style={styles.seedText}>
+                  Description: {item.description}
+                </Text>
                 <Text style={styles.seedText}>Added on: {item.createdAt}</Text>
               </View>
             </View>

@@ -35,7 +35,6 @@ const HomePage = ({ navigation, isLoggedIn, userName }) => {
               <Text style={styles.authButtonText}>Register</Text>
             </TouchableOpacity>
 
-           
             <TouchableOpacity
               style={styles.authButton}
               onPress={() => navigation.navigate('Login')}
@@ -61,7 +60,15 @@ const HomePage = ({ navigation, isLoggedIn, userName }) => {
       </View>
 
       {/* Seeds Section */}
-      <Text style={styles.sectionTitle}>Seeds</Text>
+      <View style={styles.sectionWithButton}>
+        <Text style={styles.sectionTitle}>Seeds</Text>
+        <TouchableOpacity
+          style={styles.visualizeButton}
+          onPress={() => navigation.navigate('SeedVisualizer')}
+        >
+          <Text style={styles.visualizeButtonText}>Visualize</Text>
+        </TouchableOpacity>
+      </View>
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
@@ -86,7 +93,15 @@ const HomePage = ({ navigation, isLoggedIn, userName }) => {
       </ScrollView>
 
       {/* Plants Section */}
-      <Text style={styles.sectionTitle}>Plants</Text>
+      <View style={styles.sectionWithButton}>
+        <Text style={styles.sectionTitle}>Plants</Text>
+        <TouchableOpacity
+          style={styles.visualizeButton}
+          onPress={() => navigation.navigate('PlantVisualizer')}
+        >
+          <Text style={styles.visualizeButtonText}>Visualize</Text>
+        </TouchableOpacity>
+      </View>
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
@@ -110,14 +125,13 @@ const HomePage = ({ navigation, isLoggedIn, userName }) => {
         />
       </ScrollView>
 
-
-      <TouchableOpacity 
-            style={styles.button} 
-            onPress={() => navigation.navigate('DetectSoil')}> 
-            <Text style={styles.authButtonText}>Detect Soil</Text> 
-            </TouchableOpacity> 
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate('DetectSoil')}
+      >
+        <Text style={styles.authButtonText}>Detect Soil</Text>
+      </TouchableOpacity>
     </ScrollView>
-    
   );
 };
 
@@ -194,22 +208,24 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: Colors.light.text,
   },
-  diagnosisButton: {
-    backgroundColor: Colors.light.green,
-    padding: 15,
-    borderRadius: 10,
+  sectionWithButton: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 20,
-  },
-  diagnosisText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: 'bold',
+    marginBottom: 10,
   },
   sectionTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    marginBottom: 10,
+  },
+  visualizeButton: {
+    backgroundColor: Colors.light.green,
+    padding: 10,
+    borderRadius: 5,
+  },
+  visualizeButtonText: {
+    color: '#fff',
+    fontWeight: 'bold',
   },
   gallery: {
     flexDirection: 'row',
@@ -220,6 +236,13 @@ const styles = StyleSheet.create({
     height: 100,
     borderRadius: 10,
     marginRight: 10,
+  },
+  button: {
+    backgroundColor: Colors.light.green,
+    padding: 15,
+    borderRadius: 10,
+    alignItems: 'center',
+    marginBottom: 20,
   },
 });
 
